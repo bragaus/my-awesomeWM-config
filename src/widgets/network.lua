@@ -34,7 +34,7 @@ return function()
           {
             {
               id = 'icon',
-              image = gears.color.recolor_image(icondir .. "no-internet" .. ".svg", color["Grey900"]),
+              image = gears.color.recolor_image(icondir .. "no-internet" .. ".svg", "#ff8c00"),
               widget = wibox.widget.imagebox,
               resize = false
             },
@@ -62,7 +62,7 @@ return function()
       widget = wibox.container.margin
     },
     bg = color["Red200"],
-    fg = color["Grey900"],
+    fg = "#ff8c00",
     shape = function(cr, width, height)
       gears.shape.rounded_rect(cr, width, height, 5)
     end,
@@ -165,7 +165,7 @@ return function()
             update_wireless_data(false)
           end
           network_widget.container.network_layout.spacing = dpi(8)
-          network_widget.container.network_layout.icon_margin.icon_layout.icon:set_image(gears.color.recolor_image(icondir .. icon .. ".svg", color["Grey900"]))
+          network_widget.container.network_layout.icon_margin.icon_layout.icon:set_image(gears.color.recolor_image(icondir .. icon .. ".svg", "#ff8c00"))
         end
       )
     end
@@ -261,7 +261,7 @@ return function()
     network_widget.container.network_layout.label.visible = false
     update_tooltip("Network unreachable")
     network_widget.container.network_layout.spacing = dpi(0)
-    network_widget.container.network_layout.icon_margin.icon_layout.icon:set_image(gears.color.recolor_image(icondir .. icon .. ".svg", color["Grey900"]))
+    network_widget.container.network_layout.icon_margin.icon_layout.icon:set_image(gears.color.recolor_image(icondir .. icon .. ".svg", "#ff8c00"))
   end
 
   local check_network_mode = function()
@@ -324,7 +324,7 @@ return function()
   }
 
   -- Signals
-  Hover_signal(network_widget, color["Red200"], color["Grey900"])
+  Hover_signal(network_widget, color["Red200"], "#ff8c00")
 
   network_widget:connect_signal(
     "button::press",

@@ -22,7 +22,7 @@ return function()
           {
             {
               id = "icon",
-              image = gears.color.recolor_image(icondir .. "power.svg", color["Grey900"]),
+              image = gears.color.recolor_image(icondir .. "power.svg", "#ff8c00"),
               widget = wibox.widget.imagebox,
               resize = false
             },
@@ -50,7 +50,7 @@ return function()
   }
 
   -- Signals
-  Hover_signal(power_widget, color["Red200"], color["Grey900"])
+  Hover_signal(power_widget, color["Red200"], "#ff8c00")
 
   power_widget:connect_signal(
     "button::release",
