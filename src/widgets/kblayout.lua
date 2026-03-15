@@ -23,7 +23,7 @@ return function(s)
               id = "icon",
               widget = wibox.widget.imagebox,
               resize = false,
-              image = gears.color.recolor_image(icondir .. "keyboard.svg", color["Grey900"])
+              image = gears.color.recolor_image(icondir .. "keyboard.svg", "#ff8c00")
             },
             id = "icon_layout",
             widget = wibox.container.place
@@ -48,7 +48,7 @@ return function(s)
       widget = wibox.container.margin
     },
     bg = color["Green200"],
-    fg = color["Grey900"],
+    fg = color["#ff8c00"],
     shape = function(cr, width, height)
       gears.shape.rounded_rect(cr, width, height, 5)
     end,
@@ -225,8 +225,8 @@ return function(s)
             local layout = stdout:gsub("\n", "")
             if kb_layout_item.keymap == layout then
               kb_layout_item.bg = color["DeepPurple200"]
-              kb_layout_item:get_children_by_id("background2")[1].fg = color["Grey900"]
-              kb_layout_item:get_children_by_id("background1")[1].fg = color["Grey900"]
+              kb_layout_item:get_children_by_id("background2")[1].fg = "#ff8c00"
+              kb_layout_item:get_children_by_id("background1")[1].fg = "#ff8c00" 
             else
               kb_layout_item.bg = color["Grey800"]
               kb_layout_item:get_children_by_id("background2")[1].fg = color["Red200"]
@@ -352,7 +352,7 @@ return function(s)
   )
 
   -- Signals
-  Hover_signal(kblayout_widget, color["Green200"], color["Grey900"])
+  Hover_signal(kblayout_widget, color["Green200"], "#ff8c00")
 
   local kblayout_keygrabber = awful.keygrabber {
     autostart = false,

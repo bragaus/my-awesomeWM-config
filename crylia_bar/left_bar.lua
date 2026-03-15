@@ -44,7 +44,13 @@ return function(s, widgets)
         w.bg = "#00000000"
       end
       if w.fg ~= nil then
-        w.fg = color["Purple50"]
+        w.fg = "#ff8c00"
+      end
+      if w.set_image and w.get_image then
+        local img = w:get_image()
+        if img then
+          w:set_image(gears.color.recolor_image(img, "#ff8c00"))
+        end
       end
     end
 
