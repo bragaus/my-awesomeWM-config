@@ -66,7 +66,7 @@ local list_update = function(widget, buttons, label, data, objects)
 
     tag_widget:buttons(create_buttons(buttons, object))
 
-    tag_widget.container.margin.label:set_text(object.index)
+    tag_widget.container.margin.label:set_text(object.name or tostring(object.index))
     if object.urgent == true then
       tag_widget:set_bg(color["#7a1ea1"])
       tag_widget:set_fg(color["Purple50"])
@@ -77,7 +77,7 @@ local list_update = function(widget, buttons, label, data, objects)
       tag_widget:set_bg("#2b0c45")
     end
 
-    -- Set the icon for each client
+    --[[ Set the icon for each client
     for _, client in ipairs(object:clients()) do
       tag_widget.container.margin:set_right(0)
       local icon = wibox.widget {
@@ -100,7 +100,7 @@ local list_update = function(widget, buttons, label, data, objects)
         strategy = "exact",
         layout = wibox.container.constraint,
       })
-    end
+    end--]]
 
     --#region Hover_signal
     local old_wibox, old_cursor, old_bg

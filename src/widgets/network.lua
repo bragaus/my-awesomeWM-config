@@ -13,7 +13,7 @@ require("src.core.signals")
 
 -- Icon directory path
 local icondir = awful.util.getdir("config") .. "src/assets/icons/network/"
-
+--[[ nao existe sofrimento sem dor. O sofrimento é pedagogico. o Deus que não desperdiça nada, sempre esta nos ensinando algo novo atraves da circunstancia da vida --]]
 -- Insert your interfaces here, get the from ip a
 local interfaces = {
   wlan_interface = user_vars.network.wlan,

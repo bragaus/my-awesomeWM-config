@@ -9,7 +9,12 @@ local gears = require("gears")
 local wibox = require("wibox")
 
 return function(s, widgets)
-
+--[[ humildade nao e pensar menos de si, e pensar menos em si e mais no outro
+-- DEUS NAO MUDA NADA QUE VC TOLERA!
+--
+-- Aprenda a ser fiel no pouco e eu te da muito
+--
+-- ]]
   local top_left = awful.popup {
     screen = s,
     widget = wibox.container.background,
@@ -23,9 +28,7 @@ return function(s, widgets)
     end
   }
 
-  top_left:struts {
-    top = 55
-  }
+  top_left:struts { top = 55 }
 
   local segment_palette = {
     "#2b0c45",
@@ -53,7 +56,6 @@ return function(s, widgets)
         end
       end
     end
-
     tint_one(widget)
     if widget.get_all_children then
       for _, child in ipairs(widget:get_all_children()) do
@@ -64,9 +66,7 @@ return function(s, widgets)
 
   local function create_powerline_segment(widget, index)
     local current_bg = segment_bg_for(index)
-
     normalize_widget_colors(widget)
-
     return wibox.widget {
       {
         {
@@ -82,7 +82,7 @@ return function(s, widgets)
       },
       {
         {
-          text = "",
+          text = "",
           align = "center",
           valign = "center",
           font = "JetBrainsMono Nerd Font, ExtraBold 30",
@@ -97,12 +97,37 @@ return function(s, widgets)
     }
   end
 
+  -- Envolve o launcher num container que:
+  --   • não tem background nem shape (preserva o círculo do GIF)
+  --   • centraliza verticalmente na barra
+  --   • adiciona pequeno padding lateral para não colar na borda
+  local function create_launcher_wrap(widget)
+    return wibox.widget {
+      widget,
+      valign = "center",
+      halign = "center",
+      left   = dpi(6),
+      right  = dpi(4),
+      widget = wibox.container.margin
+    }
+  end
+
   local function prepare_widgets(widget_list)
     local layout = wibox.layout.fixed.horizontal()
     layout.spacing = -dpi(18)
 
-    for i, widget in ipairs(widget_list) do
-      layout:add(create_powerline_segment(widget, i))
+    -- O índice do segmento powerline não conta o launcher,
+    -- então rastreamos separadamente para manter as cores certas.
+    local segment_index = 1
+
+    for _, widget in ipairs(widget_list) do
+      if widget._preserve_segment then
+        -- Launcher (ou qualquer widget marcado): sem powerline, sem bg
+        layout:add(create_launcher_wrap(widget))
+      else
+        layout:add(create_powerline_segment(widget, segment_index))
+        segment_index = segment_index + 1
+      end
     end
 
     return wibox.widget {
@@ -119,3 +144,4 @@ return function(s, widgets)
     layout = wibox.layout.fixed.horizontal
   }
 end
+

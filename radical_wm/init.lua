@@ -12,14 +12,15 @@ awful.screen.connect_for_each_screen(
   -- Create 9 tags
   awful.layout.layouts = user_vars.layouts
   awful.tag(
-    { "PLANO-WEB3", "MEU-TUTOR", "ASSINE-AI", "NEW-ICHIMOKU" },
+    { "PLANO-WEB3", "VIBE-STUDING", "GHOST-SIGN", "NEW-ICHIMOKU" },
     s,
-    user_vars.layouts[1]
+    user_vars.layouts[6]
   )
-
+--[[ uma das coisas mais tristes na vida e chegar ao fim e olhar oara traz com remorso, sabendo que voce poderia teer sido feito e tido muito mais --]]
   require("src.modules.powermenu")(s)
   -- TODO: rewrite calendar osd, maybe write an own inplementation
   -- require("src.modules.calendar_osd")(s)
+  s.app_launcher = require("src.widgets.app_launcher")(s)
   require("src.modules.volume_osd")(s)
   require("src.modules.brightness_osd")(s)
   require("src.modules.titlebar")
@@ -35,21 +36,21 @@ awful.screen.connect_for_each_screen(
   --s.powerbutton = require("src.widgets.power")()
   --s.kblayout = require("src.widgets.kblayout")(s)
   s.taglist = require("src.widgets.taglist")(s)
+  --[[nem sempre o processo tem a ver com a promessa, mas acredite voce esta crescendo e tudo esta cooperando para o seu bem --]]
   --s.tasklist = require("src.widgets.tasklist")(s)
   --s.cpu_freq = require("src.widgets.cpu_info")("freq", "average")
 
   -- Add more of these if statements if you want to change
   -- the modules/widgets per screen.
   if s.index == 1 then
-    s.systray = require("src.widgets.systray")(s)
     s.cpu_usage = require("src.widgets.cpu_info")("usage")
     s.cpu_temp = require("src.widgets.cpu_info")("temp")
     s.gpu_usage = require("src.widgets.gpu_info")("usage")
     --s.gpu_temp = require("src.widgets.gpu_info")("temp")
     s.tasklist = require("src.widgets.tasklist")(s)
 
-    require("crylia_bar.left_bar")(s, { s.layoutlist }) --s.systray, s.taglist })
-    require("crylia_bar.center_bar")(s, { s.tasklist })
+    require("radical_wm.left_bar")(s, { s.layoutlist }) --s.systray, s.taglist })
+    require("radical_wm.center_bar")(s, { s.tasklist })
     --require("crylia_bar.right_bar")(s, { s.gpu_usage, s.gpu_temp, s.cpu_usage, s.cpu_temp, s.audio, s.kblayout, s.date, s.clock, s.powerbutton })
     --require("crylia_bar.dock")(s, user_vars.dock_programs)
 
@@ -65,35 +66,19 @@ awful.screen.connect_for_each_screen(
     s.clock = require("src.widgets.clock")()
     s.powerbutton = require("src.widgets.power")()
     s.layoutlist = require("src.widgets.layout_list")(s)
-    s.taglist = require("src.widgets.taglist")(s)
-    --require("crylia_bar.left_bar")(s, { s.tasklist, s.layoutlist, s.taglist })
-    --require("crylia_bar.left_bar")(s, { s.layoutlist, s.taglist })
-    --require("crylia_bar.center_bar")(s, { s.tasklist })
-    --require("crylia_bar.right_bar")(s, { s.ram_info, s.audio, s.kblayout, s.network, s.date, s.clock, s.powerbutton })
-    --require("crylia_bar.left_bar")(s, { s.tasklist })
-    --require("crylia_bar.right_bar")(s, { s.layoutlist, s.taglist, s.ram_info, s.network, s.audio, s.kblayout, s.date, s.clock, s.powerbutton })
-    --require("crylia_bar.dock")(s, user_vars.dock_programs)
+    s.cpu_usage = require("src.widgets.cpu_info")("usage")
+    s.cpu_temp = require("src.widgets.cpu_info")("temp")
+    s.gpu_usage = require("src.widgets.gpu_info")("usage")
+    --s.systray = require("src.widgets.systray")(s)
 
-   -- s.tasklist = require("src.widgets.tasklist")(s)
-   -- s.network = require("src.widgets.network")()
-   -- s.ram_info = require("src.widgets.ram_info")()
-   -- s.audio = require("src.widgets.audio")(s)
-   -- s.kblayout = require("src.widgets.kblayout")(s)
-   -- s.date = require("src.widgets.date")()
-   -- s.clock = require("src.widgets.clock")()
-   -- s.powerbutton = require("src.widgets.power")()
-    require("crylia_bar.center_bar")(s, { s.tasklist })
-    require("crylia_bar.dock")(s, user_vars.dock_programs)
-    require("crylia_bar.right_bar")(s, { s.ram_info, s.network, s.audio, s.kblayout, s.date, s.clock, s.powerbutton })
-    require("crylia_bar.left_bar")(s, { s.layoutlist })
 
-    --require("crylia_bar.left_bar")(s, { s.layoutlist, s.taglist, s.tasklist, s.ram_info, s.network, s.audio, s.kblayout, s.date, s.clock, s.powerbutton })
-    --require("crylia_bar.dock")(s, user_vars.dock_programs)
-
-    --require("crylia_bar.left_bar")(s, { s.layoutlist, s.taglist })
-    --require("crylia_bar.center_bar")(s, { s.tasklist })
-    --require("crylia_bar.right_bar")(s, { s.ram_info, s.audio, s.kblayout, s.network, s.date, s.clock, s.powerbutton })
-    --require("crylia_bar.dock")(s, user_vars.dock_programs)
+   -- s.battery = require("src.widgets.battery")()
+   -- require("crylia_bar.center_bar")(s, { s.systray })
+   -- require("crylia_bar.first_bar")(s { s.app_launcher })
+    require("radical_wm.left_bar")(s, { s.layoutlist, s.taglist })
+    require("radical_wm.center_bar")(s, { s.tasklist })
+    require("radical_wm.right_bar")(s, { s.cpu_usage, s.gpu_usage, s.ram_info, s.network, s.audio, s.kblayout, s.date, s.clock, s.powerbutton })
+    require("radical_wm.dock")(s, user_vars.dock_programs)
   end
 end
 )
