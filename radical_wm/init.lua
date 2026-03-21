@@ -3,6 +3,8 @@
 --------------------------------------------------------------------------------------------------------------
 -- Awesome Libs
 local awful = require("awful")
+local awful = require("awful")
+local dpi = require("beautiful").xresources.apply_dpi
 
 awful.screen.connect_for_each_screen(
 -- For each screen this function is called once
@@ -20,7 +22,6 @@ awful.screen.connect_for_each_screen(
   require("src.modules.powermenu")(s)
   -- TODO: rewrite calendar osd, maybe write an own inplementation
   -- require("src.modules.calendar_osd")(s)
-  s.app_launcher = require("src.widgets.app_launcher")(s)
   require("src.modules.volume_osd")(s)
   require("src.modules.brightness_osd")(s)
   require("src.modules.titlebar")
@@ -57,6 +58,24 @@ awful.screen.connect_for_each_screen(
   end
 
   if s.index == 2 then
+
+s.cyber_chart = require("src.widgets.system_monitor_chart") {
+  width = dpi(320),
+  height = dpi(96),
+  interval = 1,
+  samples = 42,
+  radius = dpi(10),
+  palette = {
+    cpu = "#00F6FF",
+    mem = "#FF00F5",
+    gpu = "#8BFF00",
+    net = "#FF9F1C",
+    grid = "#5A2A82",
+    text = "#E8D9FF",
+    overlay = "#0B0714"
+  }
+}
+
     s.tasklist = require("src.widgets.tasklist")(s)
     s.network = require("src.widgets.network")()
     s.ram_info = require("src.widgets.ram_info")()
@@ -69,14 +88,16 @@ awful.screen.connect_for_each_screen(
     s.cpu_usage = require("src.widgets.cpu_info")("usage")
     s.cpu_temp = require("src.widgets.cpu_info")("temp")
     s.gpu_usage = require("src.widgets.gpu_info")("usage")
+    s.app_launcher = require("src.widgets.app_launcher")(s)
     --s.systray = require("src.widgets.systray")(s)
 
 
    -- s.battery = require("src.widgets.battery")()
    -- require("crylia_bar.center_bar")(s, { s.systray })
    -- require("crylia_bar.first_bar")(s { s.app_launcher })
-    require("radical_wm.left_bar")(s, { s.layoutlist, s.taglist })
-    require("radical_wm.center_bar")(s, { s.tasklist })
+   -- require("radical_wm.left_bar")(s, { s.layoutlist, s.taglist })
+    require("radical_wm.radical_bar")(s, { s.cyber_chart, s.layoutlist, s.tasklist, s.taglist }, { s.app_launcher })
+    require("radical_wm.center_bar")(s, { s.cyber_chat })
     require("radical_wm.right_bar")(s, { s.cpu_usage, s.gpu_usage, s.ram_info, s.network, s.audio, s.kblayout, s.date, s.clock, s.powerbutton })
     require("radical_wm.dock")(s, user_vars.dock_programs)
   end

@@ -47,6 +47,7 @@ return function(s)
     fairv = "fairv.svg",
     fullscreen = "fullscreen.svg",
     max = "max.svg",
+    magnifier = "magnifier.svg",
     cornerne = "cornerne.svg",
     cornernw = "cornernw.svg",
     cornerse = "cornerse.svg",
@@ -59,15 +60,6 @@ return function(s)
     local current_layout = awful.layout.get(s)
     local layout_name = awful.layout.getname(current_layout)
     local icon_file = layout_icon_map[layout_name]
-    local gdebug = require("gears.debug")
-    local naughty = require("naughty")
-
-naughty.notify({
-    title = "Widget debug",
-    text = gdebug.dump_return(current_layout),
-    timeout = 0
-})
-
 
     if icon_file then
       local icon_path = gfs.get_configuration_dir() .. "src/assets/layout/" .. icon_file
@@ -82,12 +74,6 @@ naughty.notify({
     "button::press",
     function()
       awful.layout.inc(-1, s)
-
-naughty.notify({
-    title = "CURRENT LAYOUT",
-   text = awful.layout.inc(-1, s),
-    timeout = 0
-})
       update_layout_icon()
     end
   )

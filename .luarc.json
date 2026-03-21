@@ -1,0 +1,8 @@
+{
+  "Lua.workspace.library": ["/usr/share/awesome/lib",
+        "${3rd}/lfs/library"],
+  "Lua.runtime.version": "Lua 5.3",
+    "diagnostics.globals": [
+        "lfs"
+    ]
+}

@@ -35,7 +35,7 @@ end
 
 return function(s)
   -- Tamanho do botão circular — altere este único valor para redimensionar
-  local SIZE = dpi(36)
+  local SIZE = dpi(56)
 
   -- =========================================================
   -- Widget Cairo puro: desenha o GIF diretamente num círculo

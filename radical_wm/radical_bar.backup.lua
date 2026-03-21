@@ -3,58 +3,27 @@
 --------------------------------------------------------------------------------------------------------------
 -- Awesome Libs
 local awful = require("awful")
+local color = require("src.theme.colors")
 local dpi = require("beautiful").xresources.apply_dpi
 local gears = require("gears")
 local wibox = require("wibox")
 
 return function(s, widgets)
---[[ humildade nao e pensar menos de si, [e pensar menos em sim e mais no outro
--- DEUS NAO MUDA NADA QUE VC TOLERA! 
---
--- Aprenda a ser fiel no pouco e eu te sobre muito
---
--- ]]
 
-  local top_first = awful.popup {
+  local top_right = awful.popup {
     screen = s,
     widget = wibox.container.background,
     ontop = false,
     bg = "#00000000",
     visible = true,
-    maximum_width = dpi(980),
-    placement = function(c) awful.placement.top_left(c, { margins = dpi(10) }) end,
+    placement = function(c) awful.placement.top_right(c, { margins = dpi(10) }) end,
     shape = function(cr, width, height)
       gears.shape.rounded_rect(cr, width, height, 4)
     end
   }
-  --[[ areas de trabalho vai ficar na esquerda ]]--
-  local top_left = awful.popup {
-    screen = s,
-    widget = wibox.container.background,
-    ontop = false,
-    bg = "#00000000",
-    visible = true,
-    maximum_width = dpi(980),
-    placement = function(c) awful.placement.top_left(c, { margins = dpi(10) }) end,
-    shape = function(cr, width, height)
-      gears.shape.rounded_rect(cr, width, height, 4)
-    end
-  }
---  local naughty = require("naughty")
---  local gdebug = require("gears.debug")
 
---naughty.notify({
---    title = "Widget debug",
- --   text = gdebug.dump_return(top_first),
- --   timeout = 0
---})
-
-  top_left:struts {
+  top_right:struts {
     top = 55
-  }
-
-  top_first:struts {
-    top = 100
   }
 
   local segment_palette = {
@@ -64,11 +33,6 @@ return function(s, widgets)
     "#6d28d9"
   }
 
---[[naughty.notify({
-    title = "Widget debug",
-    text = gdebug.dump_return(index),
-    timeout = 0
-})--]]
   local function segment_bg_for(index)
     return segment_palette[((index - 1) % #segment_palette) + 1]
   end
@@ -98,24 +62,24 @@ return function(s, widgets)
   end
 
   local function create_powerline_segment(widget, index)
-    --[[naughty.notify({
-      title = "Index",
-      text = gdebug.dump_return(index),
-      timeout = 0
-    })--]]
-
     local current_bg = segment_bg_for(index)
-    
-    --[[naughty.notify({
-      title = "Current bg",
-      text = gdebug.dump_return(current_bg),
-      timeout = 0
-    })--]]
-
 
     normalize_widget_colors(widget)
 
-    local myWibox = wibox.widget {
+    return wibox.widget {
+      {
+        {
+          text = "",
+          align = "center",
+          valign = "center",
+          font = "JetBrainsMono Nerd Font, ExtraBold 30",
+          widget = wibox.widget.textbox
+        },
+        fg = current_bg,
+        bg = "#00000000",
+        forced_width = dpi(26),
+        widget = wibox.container.background
+      },
       {
         {
           widget,
@@ -128,30 +92,8 @@ return function(s, widgets)
         bg = current_bg,
         widget = wibox.container.background
       },
-      {
-        {
-          text = "",
-          align = "center",
-          valign = "center",
-          font = "JetBrainsMono Nerd Font, ExtraBold 30",
-          widget = wibox.widget.textbox
-        },
-        fg = current_bg,
-        bg = "#00000000",
-        forced_width = dpi(26),
-        widget = wibox.container.background
-      },
       layout = wibox.layout.fixed.horizontal
     }
-
-
-   --[[ naughty.notify({
-      title = "MyWibox",
-      text = gdebug.dump_return(myWibox),
-      timeout = 0
-    })--]]
-
-    return myWibox
   end
 
   local function prepare_widgets(widget_list)
@@ -169,17 +111,11 @@ return function(s, widgets)
     }
   end
 
-  top_first:setup {
+  top_right:setup {
+    nil,
+    nil,
     prepare_widgets(widgets),
-    nil,
-    nil,
-    layout = wibox.layout.fixed.horizontal
-  }
-
-  top_left:setup {
-    prepare_widgets(widgets),
-    nil,
-    nil,
-    layout = wibox.layout.fixed.horizontal
+    layout = wibox.layout.align.horizontal
   }
 end
+

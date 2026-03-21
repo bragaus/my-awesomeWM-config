@@ -9,6 +9,9 @@
 -- Initialising, order is important!
 
 local awful = require("awful")
+local gfs = require("gears.filesystem")
+local plano_gif = require("src.widgets.plano_gif")
+plano_gif.preload(500)
 require("src.theme.user_variables")
 require("src.theme.init")
 require("src.core.error_handling")
