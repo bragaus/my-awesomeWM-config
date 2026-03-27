@@ -72,20 +72,52 @@ return function(s, widgets)
     nil,
     prepare_widgets(widgets),
     nil,
-    layout = wibox.layout.align.horizontal
+    layout = wibox.layout.fixed.horizontal
   }
 
-  local function update_visibility()
-    local selected_tag = s.selected_tag
-    top_center.visible = selected_tag and #selected_tag:clients() > 0 or false
-  end
 
-  client.connect_signal("manage", update_visibility)
-  client.connect_signal("unmanage", update_visibility)
-  client.connect_signal("tagged", update_visibility)
-  client.connect_signal("untagged", update_visibility)
-  tag.connect_signal("property::selected", update_visibility)
-  awesome.connect_signal("refresh", update_visibility)
-update_visibility()
+  client.connect_signal(
+    "manage",
+    function(c)
+    if #s.selected_tag:clients() < 1 then
+      top_center.visible = false
+    else
+      top_center.visible = true
+    end
+  end
+  )
+
+  client.connect_signal(
+    "unmanage",
+    function(c)
+    if #s.selected_tag:clients() < 1 then
+      top_center.visible = false
+    else
+      top_center.visible = true
+    end
+  end
+  )
+
+  client.connect_signal(
+    "tag::switched",
+    function(c)
+    if #s.selected_tag:clients() < 1 then
+      top_center.visible = false
+    else
+      top_center.visible = true
+    end
+  end
+  )
+
+  awesome.connect_signal(
+    "refresh",
+    function(c)
+    if #s.selected_tag:clients() < 1 then
+      top_center.visible = false
+    else
+      top_center.visible = true
+    end
+  end
+  )
 
 end

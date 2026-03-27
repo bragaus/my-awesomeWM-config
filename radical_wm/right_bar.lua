@@ -11,23 +11,6 @@ local system_monitor_chart = require("src.widgets.system_monitor_chart")
 return function(s, widgets)
   widgets = widgets or {}
 
-  local cyber_chart = system_monitor_chart {
-    width = dpi(320),
-    height = dpi(96),
-    interval = 1,
-    samples = 42,
-    radius = dpi(10),
-    palette = {
-      cpu = "#00F6FF",
-      mem = "#FF00F5",
-      gpu = "#8BFF00",
-      net = "#FF9F1C",
-      grid = "#5A2A82",
-      text = "#E8D9FF",
-      overlay = "#0B0714"
-    }
-  }
-
   -- Se quiser que seja só o gráfico, deixe assim:
   -- widgets = { cyber_chart }
 

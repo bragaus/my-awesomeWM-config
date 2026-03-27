@@ -3,7 +3,6 @@
 --------------------------------------------------------------------------------------------------------------
 -- Awesome Libs
 local awful = require("awful")
-local awful = require("awful")
 local dpi = require("beautiful").xresources.apply_dpi
 
 awful.screen.connect_for_each_screen(
@@ -96,8 +95,8 @@ s.cyber_chart = require("src.widgets.system_monitor_chart") {
    -- require("crylia_bar.center_bar")(s, { s.systray })
    -- require("crylia_bar.first_bar")(s { s.app_launcher })
    -- require("radical_wm.left_bar")(s, { s.layoutlist, s.taglist })
-    require("radical_wm.radical_bar")(s, { s.cyber_chart, s.layoutlist, s.tasklist, s.taglist }, { s.app_launcher })
-    require("radical_wm.center_bar")(s, { s.cyber_chat })
+    require("radical_wm.radical_bar")(s, { s.layoutlist, s.tasklist, s.taglist }, { s.app_launcher })
+    require("radical_wm.center_bar")(s, { s.cyber_chart })
     require("radical_wm.right_bar")(s, { s.cpu_usage, s.gpu_usage, s.ram_info, s.network, s.audio, s.kblayout, s.date, s.clock, s.powerbutton })
     require("radical_wm.dock")(s, user_vars.dock_programs)
   end
