@@ -149,6 +149,7 @@ local function file_exists(path)
   return true
 end
 
+-- itera sobre cada path na lista paths
 local function first_existing_path(paths)
   for _, path in ipairs(paths or {}) do
     if file_exists(path) then
@@ -159,6 +160,7 @@ local function first_existing_path(paths)
   return nil
 end
 
+-- coleta todos os caminhos existentes em uma lista 
 local function collect_existing_paths(paths)
   local collected = {}
 
@@ -171,6 +173,7 @@ local function collect_existing_paths(paths)
   return collected
 end
 
+-- carrega uma imagem de forma segura
 local function load_surface_safe(path)
   if not path then
     return nil
@@ -184,6 +187,7 @@ local function load_surface_safe(path)
   return nil
 end
 
+-- desenhar o plano de fundo
 local function draw_surface_cover(cr, surface, width, height, alpha)
   if not surface then
     return
@@ -192,6 +196,7 @@ local function draw_surface_cover(cr, surface, width, height, alpha)
   local image_width = surface:get_width()
   local image_height = surface:get_height()
 
+  -- se n tiver imagem carregada
   if image_width <= 0 or image_height <= 0 then
     return
   end

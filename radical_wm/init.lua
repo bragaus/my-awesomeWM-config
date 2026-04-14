@@ -43,6 +43,26 @@ awful.screen.connect_for_each_screen(
   -- Add more of these if statements if you want to change
   -- the modules/widgets per screen.
   if s.index == 1 then
+s.cyber_chart = require("src.widgets.system_monitor_chart") {
+  width = dpi(1180),
+  height = dpi(720),
+  interval = 1,
+  samples = 42,
+  radius = dpi(18),
+  palette = {
+    accent = "#ff7a00",
+    cpu = "#ff9a1f",
+    mem = "#9c63ff",
+    gpu = "#62b9ff",
+    net = "#55ffd7",
+    grid = "#ff7a00",
+    text = "#fff4e8",
+    overlay = "#120d22",
+    glow = "#8d72ff"
+  }
+}
+
+
     s.cpu_usage = require("src.widgets.cpu_info")("usage")
     s.cpu_temp = require("src.widgets.cpu_info")("temp")
     s.gpu_usage = require("src.widgets.gpu_info")("usage")
@@ -52,6 +72,7 @@ awful.screen.connect_for_each_screen(
     require("radical_wm.left_bar")(s, { s.layoutlist }) --s.systray, s.taglist })
     require("radical_wm.center_bar")(s, { s.tasklist })
     --require("crylia_bar.right_bar")(s, { s.gpu_usage, s.gpu_temp, s.cpu_usage, s.cpu_temp, s.audio, s.kblayout, s.date, s.clock, s.powerbutton })
+    require("radical_wm.center_bar")(s, { s.cyber_chart })
     --require("crylia_bar.dock")(s, user_vars.dock_programs)
 
   end
